@@ -29,21 +29,6 @@ function injectButton(item) {
     store_capsule.dispatchEvent(new Event('mouseout', {bubbles: false}));
   });
 
-  // Styling
-  button.style.background = '#222';
-  button.style.color = '#fff';
-  // button.style.zIndex = '1000';
-  button.style.border = '1px solid #444';
-  button.style.borderRadius = '4px';
-
-  button.style.marginLeft = 'auto';
-  button.style.flexShrink = '0';
-  button.style.padding = '0 10px';
-  button.style.alignItems = 'center';
-  // button.style.top = '15';
-  // button.style.right = '-100px';
-  // button.style.height = (item.offsetHeight - 30) + 'px';
-
   item.appendChild(button);
 }
 

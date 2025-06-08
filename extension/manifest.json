@@ -8,6 +8,7 @@
         {
             "matches": ["*://store.steampowered.com/curator/*"],
             "js": ["content.js"],
+            "css": ["styles.css"],
             "run_at": "document_idle"
         }
     ]
