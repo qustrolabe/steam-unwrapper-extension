@@ -1,40 +1,50 @@
 const classSignature = '.landingTable > div > .recommendation'
 
-function injectButton(item) {
-  if (item.querySelector('.custom-ignore-button')) return;
+function triggerDsOptions(item, tooltipIndex) {
+  const store_capsule = item.querySelector('a.store_capsule');
+  store_capsule.dispatchEvent(new Event('mouseover'));
 
-  const button = document.createElement('button');
-  button.className = 'custom-ignore-button';
-  button.textContent = 'Toggle Ignore';
-  button.setAttribute('type', 'button');
-  button.addEventListener('click', (event) => {
-    const store_capsule = item.querySelector('a.store_capsule');
-
-    store_capsule.dispatchEvent(new Event('mouseover'));
-
-    const dsOptions = item.querySelector('.ds_options');
-    if (dsOptions) {
-      dsOptions.click();
-
-      const tooltip = document.getElementsByClassName('ds_options_tooltip')[0];
-      if (tooltip && tooltip.children[1]) {
-        const btn = tooltip.children[1];
-        const btnText = btn.textContent.trim();
-        if (btnText === 'Ignore' || btnText === 'Ignored') {
-          btn.click();
-        }
-      }
+  const dsOptions = item.querySelector('.ds_options');
+  if (dsOptions) {
+    dsOptions.click();
+    const tooltip = document.getElementsByClassName('ds_options_tooltip')[0];
+    if (tooltip && tooltip.children[tooltipIndex]) {
+      const btn = tooltip.children[tooltipIndex];
+      btn.click();
     }
+  }
 
-    store_capsule.dispatchEvent(new Event('mouseout', {bubbles: false}));
+  store_capsule.dispatchEvent(new Event('mouseout', {bubbles: false}));
+}
+
+function injectButton(item) {
+  if (item.querySelector('.custom-action-button')) return;
+
+  // Toggle Ignore Button
+  const ignoreButton = document.createElement('button');
+  ignoreButton.className = 'custom-action-button';
+  ignoreButton.textContent = 'Toggle Ignore';
+  ignoreButton.setAttribute('type', 'button');
+  ignoreButton.addEventListener('click', (event) => {
+    triggerDsOptions(item, 1);
   });
 
-  item.appendChild(button);
+  // Toggle Wishlist Button
+  const wishlistButton = document.createElement('button');
+  wishlistButton.className = 'custom-action-button';
+  wishlistButton.textContent = 'Toggle Wishlist';
+  wishlistButton.setAttribute('type', 'button');
+  wishlistButton.style.marginLeft = '6px';
+  wishlistButton.addEventListener('click', (event) => {
+    triggerDsOptions(item, 0);
+  });
+
+  item.appendChild(ignoreButton);
+  item.appendChild(wishlistButton);
 }
 
 // Initial injection for already-loaded items
 function processListItems() {
-  // Adjust selector to match your target list items
   const items = document.querySelectorAll(classSignature);
   items.forEach(item => injectButton(item));
 }
@@ -56,9 +66,7 @@ if (listContainer) {
     });
   });
 
-  observer.observe(
-      listContainer,
-      {
-        childList: true,  // Watch for added/removed nodes
-      });
+  observer.observe(listContainer, {
+    childList: true,
+  });
 }

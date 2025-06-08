@@ -1,4 +1,4 @@
-.custom-ignore-button {
+.custom-action-button {
     background: #222;
     color: #fff;
     border: 1px solid #444;
@@ -7,4 +7,5 @@
     flex-shrink: 0;
     padding: 0 10px;
     align-items: center;
+    max-width: 70px;
 }
