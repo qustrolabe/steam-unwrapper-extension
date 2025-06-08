@@ -32,14 +32,12 @@ function injectButton(item) {
   item.appendChild(button);
 }
 
-// Function to process all list items
+// Initial injection for already-loaded items
 function processListItems() {
   // Adjust selector to match your target list items
   const items = document.querySelectorAll(classSignature);
   items.forEach(item => injectButton(item));
 }
-
-// Initial injection for already-loaded items
 processListItems();
 
 // Injection on newly loaded items
@@ -49,12 +47,7 @@ if (listContainer) {
     mutations.forEach((mutation) => {
       if (mutation.addedNodes.length) {
         mutation.addedNodes.forEach((node) => {
-          // Check if the added node is a div.recommendation or contains one
           if (node.nodeType === 1) {
-            if (node.matches(classSignature)) {
-              injectButton(node);
-            }
-            // Also check descendants for matching elements
             node.querySelectorAll(classSignature)
                 .forEach(item => injectButton(item));
           }
@@ -63,8 +56,9 @@ if (listContainer) {
     });
   });
 
-  observer.observe(listContainer, {
-    childList: true,  // Watch for added/removed nodes
-    subtree: true     // Watch all descendants
-  });
+  observer.observe(
+      listContainer,
+      {
+        childList: true,  // Watch for added/removed nodes
+      });
 }
