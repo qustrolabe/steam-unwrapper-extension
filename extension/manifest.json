@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Steam Curator Quick Ignore",
+    "name": "Steam Curator Unwrapper",
     "version": "1.0",
-    "description": "Quick ignoring on steam curator page",
+    "description": "Quick ignoring and wishlisting on steam curator page",
     "permissions": ["scripting"],
     "content_scripts": [
         {
