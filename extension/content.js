@@ -10,7 +10,12 @@ function triggerDsOptions(item, tooltipIndex) {
     const tooltip = document.getElementsByClassName('ds_options_tooltip')[0];
     if (tooltip && tooltip.children[tooltipIndex]) {
       const btn = tooltip.children[tooltipIndex];
-      btn.click();
+      const btnText = btn.textContent || '';
+      if (/ignore|wishlist/i.test(btnText)) {
+        btn.click();
+      } else {
+        console.error('Fail: Button text does not match Ignore or Wishlist');
+      }
     }
   }
 
