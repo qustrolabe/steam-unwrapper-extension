@@ -8,6 +8,6 @@ Browser extension that unwraps context menu on
 
 ## Download
 
-[![Firefox](https://img.shields.io/amo/dw/steam-curator-unwrapper?style=for-the-badge&logo=Firefox&label=Firefox%20download)](https://addons.mozilla.org/en-US/firefox/addon/steam-curator-unwrapper/)
+[![Firefox](https://img.shields.io/amo/dw/steam-curator-unwrapper?logo=Firefox&label=Firefox%20download)](https://addons.mozilla.org/en-US/firefox/addon/steam-curator-unwrapper/)
 
 Chrome - not unlisted at the moment, just "Load unpacked" `extension` folder in developer mode to install
